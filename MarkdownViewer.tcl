@@ -8,9 +8,14 @@ package require Tcl 8.6
 package require Tk
 package require Tkhtml 3.0
 package require Img
-package require Markdown 
 package require http
 package require tls
+
+set useCmark 1
+if { [catch {package require cmark}]==1} {
+    package require Markdown
+    set useCmark 0
+}
 
 # Add https support
 http::register https 443 [list ::tls::socket -ssl3 0 -ssl2 0 -tls1 1]
@@ -191,7 +196,11 @@ proc OpenMdFile {filename} {
     set infile [open $filename]
     set md [read $infile]
     close $infile
-    set data [::Markdown::convert $md]
+    if {$::useCmark == 1} {
+        set data [cmark::render -to html $md]
+    } else {
+        set data [::Markdown::convert $md]
+    }
 
     return $data
 }
