@@ -22,20 +22,21 @@ http::register https 443 [list ::tls::socket -ssl3 0 -ssl2 0 -tls1 1]
 
 # Setup Window size
 wm geometry . 1000x750+20+10
+ttk::setTheme "alt"
 
 # Global variable
 set basedir ""
 
 # Menu
-frame .menubar -relief raised -bd 2
+ttk::frame .menubar -relief raised -borderwidth 2
 pack .menubar -side top -fill x
 
-menubutton .menubar.file -text File -menu .menubar.file.menu
+ttk::menubutton .menubar.file -text File -menu .menubar.file.menu
 menu .menubar.file.menu -tearoff 0
 .menubar.file.menu add command -label Open  -command Open
 .menubar.file.menu add command -label Close -command Close
 .menubar.file.menu add command -label Quit  -command Exit
-menubutton .menubar.help -text Help -menu .menubar.help.menu
+ttk::menubutton .menubar.help -text Help -menu .menubar.help.menu
 menu .menubar.help.menu -tearoff 0
 .menubar.help.menu add command -label About -command HelpAbout
 pack .menubar.file .menubar.help -side left
@@ -54,7 +55,7 @@ if {[tk windowingsystem]=="aqua"} {
 }
 
 # Add Tkhtml widget
-pack [scrollbar .vsb -orient vertical -command {.label yview}] -side right -fill y
+pack [ttk::scrollbar .vsb -orient vertical -command {.label yview}] -side right -fill y
 html .label -yscrollcommand {.vsb set} -shrink 1 -imagecmd GetImageCmd
 .label handler "node" "a" ATagHandler
 pack .label -fill both -expand 1
