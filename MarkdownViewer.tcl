@@ -12,9 +12,13 @@ package require http
 package require tls
 
 set useCmark 1
-if { [catch {package require cmark}]==1} {
+if {$useCmark == 1} {
+    if { [catch {package require cmark}]==1} {
+        package require Markdown
+        set useCmark 0
+    }
+} else {
     package require Markdown
-    set useCmark 0
 }
 
 # Add https support
