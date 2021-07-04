@@ -25,8 +25,13 @@ if {$useCmark == 1} {
 http::register https 443 [list ::tls::socket -ssl3 0 -ssl2 0 -tls1 1]
 
 # Setup Window size
-wm geometry . 1000x750+20+10
-ttk::setTheme "alt"
+wm geometry . 960x660+20+10
+
+if { [catch {package require awthemes}]==0} {
+    ttk::setTheme "awbreezedark"
+} else {
+    ttk::setTheme "alt"
+}
 
 # Global variable
 set basedir ""
