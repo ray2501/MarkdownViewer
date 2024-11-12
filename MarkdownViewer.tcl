@@ -4,7 +4,7 @@
 # A simple Markdown viewer written by Tcl/Tk, v0.1
 #
 
-package require Tcl 8.6
+package require Tcl 8.6-
 package require Tk
 package require Tkhtml 3.0
 package require Img
